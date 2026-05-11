@@ -254,3 +254,24 @@ pub async fn delete_entry(id: usize, state: State<'_, AppState>) -> Result<()> {
     let client = reqwest::Client::new();
     http::delete(&client, &format!("{base}/api/entries/{id}"), &token).await
 }
+
+// ---------------------------------------------------------------------------
+// Vault file creation
+// ---------------------------------------------------------------------------
+
+#[tauri::command]
+pub async fn create_vault_file(
+    folder: String,
+    filename: String,
+    passphrase: String,
+    state: State<'_, AppState>,
+) -> Result<()> {
+    let base = state.base_url.lock().unwrap().clone();
+    let client = reqwest::Client::new();
+    #[derive(Serialize)]
+    struct Req {
+        filename: String,
+        passphrase: String,
+    }
+    http::post_void(&client, &format!("{base}/folders/{folder}"), None, &Req { filename, passphrase }).await
+}

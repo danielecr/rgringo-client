@@ -46,6 +46,22 @@ pub async fn delete(client: &Client, url: &str, token: &str) -> Result<()> {
     Ok(())
 }
 
+/// Issue a POST with a JSON body, discarding any response body (expects 2xx).
+pub async fn post_void<B: Serialize>(
+    client: &Client,
+    url: &str,
+    token: Option<&str>,
+    body: &B,
+) -> Result<()> {
+    let mut req = client.post(url).json(body);
+    if let Some(t) = token {
+        req = req.bearer_auth(t);
+    }
+    let resp = req.send().await?;
+    check(resp).await?;
+    Ok(())
+}
+
 /// Issue a POST with no body (keepalive).
 pub async fn post_empty(client: &Client, url: &str, token: &str) -> Result<()> {
     let resp = client

@@ -57,6 +57,9 @@ export const listFolders = () => invoke<string[]>("list_folders");
 export const listFolderFiles = (folder: string) =>
   invoke<string[]>("list_folder_files", { folder });
 
+export const createVaultFile = (folder: string, filename: string, passphrase: string) =>
+  invoke<void>("create_vault_file", { folder, filename, passphrase });
+
 // --- Entries ---
 
 export const listEntries = () => invoke<EntrySummary[]>("list_entries");

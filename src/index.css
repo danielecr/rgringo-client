@@ -74,6 +74,9 @@ li { display: flex; align-items: center; gap: 0.5rem; }
 .editor textarea { resize: vertical; }
 .actions { display: flex; gap: 0.7rem; }
 
+/* ── Muted text ── */
+.muted { color: #888; font-size: 0.9rem; }
+
 /* ── Error ── */
 .error { color: #e05252; font-size: 0.9rem; padding: 0.4rem 0; }
 

@@ -39,16 +39,7 @@
   },
   "plugins": {
     "shell": {
-      "open": false,
-      "sidecar": false,
-      "scope": [
-        {
-          "name": "ssh",
-          "cmd": "ssh",
-          "args": true
-        }
-      ]
-    },
-    "store": {}
+      "open": false
+    }
   }
 }

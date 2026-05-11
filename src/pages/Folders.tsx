@@ -4,6 +4,11 @@ import * as api from "@/api/client";
 
 export default function Folders() {
   const nav = useNavigate();
+
+  async function handleDisconnect() {
+    await api.disconnect();
+    nav("/connect");
+  }
   const [folders, setFolders] = useState<string[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const [files, setFiles] = useState<string[]>([]);
@@ -79,7 +84,10 @@ export default function Folders() {
 
   return (
     <div className="page folders">
-      <h2>Vaults</h2>
+      <div className="toolbar">
+        <h2 style={{ margin: 0 }}>Vaults</h2>
+        <button className="secondary" onClick={handleDisconnect}>← Disconnect</button>
+      </div>
       {error && <p className="error">{error}</p>}
 
       <div className="columns">

@@ -41,6 +41,10 @@ export const startTunnel = (opts: TunnelOptions) =>
 
 export const stopTunnel = () => invoke<void>("stop_tunnel");
 
+export const disconnect = async () => {
+  await stopTunnel().catch(() => {});
+};
+
 // --- Session ---
 
 export const openSession = (file: string, passphrase: string) =>

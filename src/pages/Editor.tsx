@@ -20,6 +20,12 @@ export default function Editor() {
     }
   }, [id, isNew]);
 
+  // Keep the server session alive while the user is editing.
+  useEffect(() => {
+    const id = setInterval(() => { api.keepAlive().catch(() => {}); }, 20_000);
+    return () => clearInterval(id);
+  }, []);
+
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
